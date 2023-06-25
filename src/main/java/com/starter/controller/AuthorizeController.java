@@ -22,7 +22,7 @@ public class AuthorizeController {
     AuthorizeService authorizeService;
 
     @PostMapping("/validate-register-email")
-    public RestBean<String> validatRegistereEmail(@Pattern(regexp = EMAIL_REGEX) @RequestParam("email") String email,
+    public RestBean<String> validateRegisterEmail(@Pattern(regexp = EMAIL_REGEX) @RequestParam("email") String email,
                                           HttpSession session) {
         String description = authorizeService.sendValidateEmail(email, session.getId(),false);
         if(description == null){

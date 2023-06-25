@@ -21,12 +21,14 @@ public class AuthorizeInterceptor implements HandlerInterceptor {
     UserMapper userMapper;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        SecurityContext context = SecurityContextHolder.getContext();
-        Authentication authentication = context.getAuthentication();
-        User user = (User)authentication.getPrincipal();//获取用户
-        String username = user.getUsername();
-        AccountUser accountUser = userMapper.findAccountUserByNameOrEmail(username);
-        request.getSession().setAttribute("accountUser", accountUser);
+        if(request.getSession().getAttribute("accountUser") == null){
+            SecurityContext context = SecurityContextHolder.getContext();
+            Authentication authentication = context.getAuthentication();
+            User user = (User)authentication.getPrincipal();//获取用户
+            String username = user.getUsername();
+            AccountUser accountUser = userMapper.findAccountUserByNameOrEmail(username);
+            request.getSession().setAttribute("accountUser", accountUser);
+        }
         return true;
     }
 }
