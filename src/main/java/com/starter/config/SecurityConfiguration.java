@@ -63,6 +63,7 @@ public class SecurityConfiguration {
 
     }
 
+    // 手动创建AuthenticationManager用于处理密码校验
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity security) throws Exception {
         return security
@@ -88,6 +89,7 @@ public class SecurityConfiguration {
 
     /**
      * JDBC token实现
+     *
      * @return
      */
     @Bean
@@ -105,6 +107,7 @@ public class SecurityConfiguration {
 
     /**
      * 跨域请求处理
+     *
      * @return
      */
     private CorsConfigurationSource corsConfigurationSource() {
